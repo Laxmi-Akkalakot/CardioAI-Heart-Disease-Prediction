@@ -1,0 +1,5 @@
+**Bug 1 – SHAP KernelExplainer:** Replace the per‑click `shap.KernelExplainer` with a `shap.TreeExplainer` (which works directly with RandomForest) and instantiate it once inside `@st.cache_resource` (or `st.session_state`) so the explainer is reused across predictions, eliminating the 30‑90 s latency and crash risk.
+
+**Bug 2 – Deprecated CSS selectors:** Stop targeting internal `css‑*` class names; instead style the sidebar and labels via stable selectors such as `[data-testid="stSidebar"]` or use Streamlit’s built‑in theming (`st.markdown(..., unsafe_allow_html=True)`) so UI remains consistent across Streamlit releases.
+
+**Bug 3 – Unpinned requirements:** Pin the core dependencies to known‑good versions (e.g., `streamlit>=1.35.0,<2.0.0`, `shap==0.44.1`, `streamlit-shap==1.0.2`, `scikit-learn>=1.4.0,<2.0.0`, plus exact versions for pandas/numpy) and regenerate `requirements.txt` to guarantee reproducible builds.
